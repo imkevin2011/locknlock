@@ -1,32 +1,44 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <transition  mode="out-in" :enter-active-class="enterActiveClass"
+                    :leave-active-class="leaveActiveClass">
+            <router-view class="animate__animated"></router-view>
+        </transition>
     </div>
-    <router-view/>
-  </div>
 </template>
 
+<script>
+    export default {
+        name: 'App',
+        data() {
+            return {
+                enterActiveClass:'',
+                leaveActiveClass:'animate__zoomOut'
+            }
+        },
+        watch: {
+            $route(to, from) {
+                if (from.path == '/' && to.path == '/home') {
+                    this.enterActiveClass = 'animate__slideInRight'
+                    this.leaveActiveClass = 'animate__slideOutRight'
+                } else if (from.path == '/' && to.path == '/backend') {
+                    this.enterActiveClass = 'animate__slideInLeft'
+                    this.leaveActiveClass = 'animate__slideOutLeft'
+                } else if (from.path == '/' && to.path == '/projects') {
+                    this.enterActiveClass = 'animate__zoomInDown'
+                    this.leaveActiveClass = 'animate__zoomOutDown'
+                }
+            }
+        },
+        methods: {}
+    }
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+    #app{
+        background-color: #151515;
+    }
+    body{
+        margin: 0;
+    }
 </style>
