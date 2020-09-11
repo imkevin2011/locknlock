@@ -36,7 +36,7 @@
 
 <style>
     #app{
-        background-color: #151515;
+        /*background-color: #151515;*/
     }
     body{
         margin: 0;
