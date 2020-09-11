@@ -1,14 +1,27 @@
 <template>
     <div id="home">
-        <div class="test"></div>
+        <navigator></navigator>
+        <login class="login-comp"></login>
+        <register class="register-comp"></register>
+        <tab-bar class="visible-xs-block visible-sm-block"></tab-bar>
     </div>
+
 </template>
 
 <script>
+    import Login from 'components/Login'
+    import Register from 'components/Register'
+    import Navigator from 'components/Navigator'
+    import TabBar from 'components/TabBar'
 
     export default {
         name: 'Home',
-        components: {},
+        components: {
+            Login,
+            Register,
+            Navigator,
+            TabBar
+        },
         methods:{
         }
     }
@@ -17,6 +30,7 @@
 <style scoped>
     #home{
         height: 100vh;
+        /*width: 100vh;*/
     }
     .test{
         height: 500px;
