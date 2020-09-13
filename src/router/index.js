@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const Nav = ()=> import('views/nav/Nav')
 const Home = ()=> import('views/home/Home')
 const Projects = ()=> import('views/projects/Projects')
 const BackEnd = ()=> import('views/backend/BackEnd')
@@ -11,7 +10,7 @@ const BackEnd = ()=> import('views/backend/BackEnd')
 const routes = [
   {
     path: '/',
-    component: Nav
+    redirect:'/home'
   },{
     path: '/home',
     component: Home
