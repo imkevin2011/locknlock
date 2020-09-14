@@ -32,8 +32,7 @@
 </template>
 
 <script>
-    import {requestForLogin} from "../network/passport";
-    import {requestForCaptcha} from "../network/passport";
+    import {requestForLogin,requestForCaptcha} from "../network/passport";
 
     export default {
         name: "Login",
@@ -48,7 +47,7 @@
                 } else {
                     callback()
                 }
-            };
+            }
             return {
                 captchaSrc:'',
                 labelPosition: 'right',
@@ -66,7 +65,7 @@
                         {validator: checkLoginInput, trigger: 'blur'}
                     ]
                 }
-            };
+            }
         },
         methods:{
             swapCard(type){
@@ -76,27 +75,26 @@
             validateLoginForm(formName){
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.login();
+                        this.doLogin();
                     } else {
                         return false;
                     }
                 });
             },
-            login(){
+            doLogin(){
                 let loginParams = {
                     user_name: this.loginForm.user_name,
                     password: this.loginForm.password,
                     captcha: this.loginForm.captcha
                 }
-                requestForLogin(loginParams).then(data => {
-                    console.log(data)
-                    if (data.status != 0) {
+                requestForLogin(loginParams).then(resp => {
+                    if (resp.status != 0) {
                         this.loginAlert(data.msg)
-                        if (data.status == -2) {
+                        if (resp.status == -2) {
                             this.addCaptcha()
                         }
                     } else {
-                        let user_data = data.data
+                        let user_data = resp.data
                         this.$store.commit('changeLoginState',{
                             user_id: user_data.user_id,
                             login_state: 1
@@ -109,7 +107,6 @@
                         this.swapCard(0)
                         this.$refs['loginForm'].resetFields();
                         this.responseStatus = 0
-
                     }
                 })
             },

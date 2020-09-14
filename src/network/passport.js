@@ -25,16 +25,3 @@ export function requestForCaptcha(user_name) {
         responseType: 'arraybuffer'
     })
 }
-
-// export function requestForCaptcha(user_id) {
-//     const instance = axios.create({
-//         baseURL: 'http://localhost:8088',
-//         params: {userId:user_id},
-//         responseType: 'arraybuffer',
-//         timeout: 5000
-//     })
-//
-//
-//     // 发起请求 返回的是 promise 对象
-//     return instance({url: '/passport/captcha'})
-// }
